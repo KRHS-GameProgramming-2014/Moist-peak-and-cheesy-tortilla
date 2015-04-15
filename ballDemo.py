@@ -1,6 +1,6 @@
 import pygame, sys, random
 from Ball import Ball
-from PlayerBall import PlayerBall
+from Player import Player
 from HUD import Text
 from HUD import Score
 from Button import Button
@@ -32,7 +32,7 @@ blocks = pygame.sprite.Group()
 all = pygame.sprite.OrderedUpdates()
 
 Ball.containers = (all, balls)
-PlayerBall.containers = (all, players)
+Player.containers = (all, players)
 BackGround.containers = (all, backgrounds)
 Block.containers = (all, blocks)
 Score.containers = (all, hudItems)
@@ -67,7 +67,7 @@ while True:
 		
 	BackGround("images/Screens/Main Screen.png")
 	
-	player = PlayerBall([width/2, height/2])
+	player = Player([width/2, height/2])
 	
 	
 	level = Level(size, 50)

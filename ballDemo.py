@@ -4,7 +4,7 @@ from Player import Player
 from HUD import Text
 from HUD import Score
 from Button import Button
-from Background import BackGround
+from BackGround import BackGround
 from Level import Level
 from Block import Block
 

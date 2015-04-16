@@ -8,8 +8,7 @@ class Player(pygame.sprite.Sprite):
 							pygame.image.load("images/Mr. MLG.PNG"),
 							pygame.image.load("images/LeftFootForward.PNG")]
 		self.changed = False
-		#self.baseImage = pygame.image.load("images/player/pu1.png")
-		#self.baseImage = pygame.transform.scale(self.baseImage, size)
+		self.stopImage = pygame.image.load("images/Mr. MLG.PNG")
 		self.frame = 0
 		self.maxFrame = len(self.images) - 1
 		self.waitCount = 0
@@ -21,6 +20,7 @@ class Player(pygame.sprite.Sprite):
 		self.speedx = 0
 		self.speedy = 0
 		self.shooting = False
+		self.moving = False
 		self.pistolCount = 0
 		self.maxPistolCount = 100000000
 		self.pistolCoolDown = 0
@@ -51,7 +51,7 @@ class Player(pygame.sprite.Sprite):
 	def move(self):
 		self.speed = [self.speedx, self.speedy]
 		self.rect = self.rect.move(self.speed)
-		
+		self.moving = True
 		
 	def animate(self):
 		if self.waitCount < self.maxWait:
@@ -65,7 +65,10 @@ class Player(pygame.sprite.Sprite):
 				self.frame = 0
 		
 		
-		self.baseImage = self.images[self.frame]    
+		if self.moving:
+			self.baseImage = self.images[self.frame]    
+		if not self.moving:
+			self.baseImage = self.stopImage
 		mousePos = pygame.mouse.get_pos()
 		mousePosPlayerX = mousePos[0] - self.rect.center[0]
 		mousePosPlayerY = mousePos[1] - self.rect.center[1]
@@ -76,7 +79,7 @@ class Player(pygame.sprite.Sprite):
 		rot_rect.center = rot_image.get_rect().center
 		rot_image = rot_image.subsurface(rot_rect)
 		self.image = rot_image
-		
+		self.moving = False
 	
 	def go(self, direction):
 		if direction == "up":

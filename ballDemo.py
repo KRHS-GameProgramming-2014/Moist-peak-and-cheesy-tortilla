@@ -1,4 +1,4 @@
-import pygame, sys, random
+import pygame, sys, random, math
 from Ball import Ball
 from Player import Player
 from HUD import Text
@@ -7,6 +7,7 @@ from Button import Button
 from BackGround import BackGround
 from Level import Level
 from Block import Block
+from Bullet import Bullet
 
 pygame.init()
 
@@ -29,11 +30,13 @@ players = pygame.sprite.Group()
 hudItems = pygame.sprite.Group()
 backgrounds = pygame.sprite.Group()
 blocks = pygame.sprite.Group()
+bullets = pygame.sprite.Group()
 all = pygame.sprite.OrderedUpdates()
 
 Ball.containers = (all, balls)
 Player.containers = (all, players)
 BackGround.containers = (all, backgrounds)
+Bullet.containers = (all, bullets)
 Block.containers = (all, blocks)
 Score.containers = (all, hudItems)
 
@@ -42,8 +45,8 @@ Score.containers = (all, hudItems)
 run = False
 
 startButton = Button([width/2, height-300], 
-				     "images/Buttons/Start Base.png", 
-				     "images/Buttons/Start Clicked.png")
+					 "images/Buttons/Start Base.png", 
+					 "images/Buttons/Start Clicked.png")
 
 while True:
 	while not run:
@@ -90,6 +93,9 @@ while True:
 					player.go("down")
 				if event.key == pygame.K_a or event.key == pygame.K_LEFT:
 					player.go("left")
+			elif event.type == pygame.MOUSEBUTTONDOWN:
+				if event.button == 1:
+					b = player.attack("dorito")
 			if event.type == pygame.KEYUP:
 				if event.key == pygame.K_w or event.key == pygame.K_UP:
 					player.go("stop up")
@@ -99,7 +105,9 @@ while True:
 					player.go("stop down")
 				if event.key == pygame.K_a or event.key == pygame.K_LEFT:
 					player.go("stop left")
-			
+				elif (event.key == pygame.MOUSEBUTTONUP):
+					b = player.shoot("stop")		
+								
 		if len(balls) < 10:
 			if random.randint(0, 1*60) == 0:
 				Ball("images/Ball/ball.png",
@@ -115,8 +123,13 @@ while True:
 		
 		playersHitBalls = pygame.sprite.groupcollide(players, balls, False, True)
 		ballsHitBalls = pygame.sprite.groupcollide(balls, balls, False, False)
+		bulletsHitBalls = pygame.sprite.groupcollide(bullets, balls, False, True)
 		
 		for player in playersHitBalls:
+			for ball in playersHitBalls[player]:
+				score.increaseScore(1)
+				
+		for bullet in playersHitBalls:
 			for ball in playersHitBalls[player]:
 				score.increaseScore(1)
 				

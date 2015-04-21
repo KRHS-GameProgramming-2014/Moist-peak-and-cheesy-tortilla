@@ -1,4 +1,5 @@
 import pygame, sys, math
+from Bullet import Bullet
 
 class Player(pygame.sprite.Sprite):
 	def __init__(self, pos = [300,400], size = [100,100]):
@@ -21,11 +22,11 @@ class Player(pygame.sprite.Sprite):
 		self.speedy = 0
 		self.shooting = False
 		self.moving = False
-		self.pistolCount = 0
-		self.maxPistolCount = 100000000
-		self.pistolCoolDown = 0
-		self.pistolCoolDownMax = 50
-		self.pistoldelay = 5
+		self.doritoCount = 0
+		self.maxDoritoCount = 100000000
+		self.doritoCoolDown = 0
+		self.doritoCoolDownMax = 50
+		self.doritoDelay = 5
 		self.damage = 40
 	
 	def update(*args):
@@ -36,16 +37,13 @@ class Player(pygame.sprite.Sprite):
 		self.animate()
 		self.changed = False
 		
-	#~ def attack(self, atk):
-		#~ if atk == "pistol" and self.pistolCoolDown == 0:
-			#~ self.shooting = True
-			#~ self.pistolCoolDown = self.pistolCoolDownMax
-			#~ return [Pistol(self)]
-		#~ '''if atk == "spray" and self.sprayCoolDown == 0:
-			#~ self.spraying = True
-			#~ self.sprayCoolDown = self.sprayCoolDownMax
-			#~ return [Spray(self)]'''
-		#~ return []
+	def attack(self, atk):
+		if atk == "dorito" and self.doritoCoolDown == 0:
+			self.shooting = True
+			#self.doritoCoolDown = self.doritoCoolDownMax
+			return [Bullet(self.rect.center, self.angle)]
+		
+		return []
 		
 		
 	def move(self):

@@ -110,7 +110,7 @@ while True:
 								
 		if len(balls) < 10:
 			if random.randint(0, 1*60) == 0:
-				Ball("images/Ball/ball.png",
+				Ball("images/Ball/Snoop Dogg.png",
 						  [random.randint(0,10), random.randint(0,10)],
 						  [random.randint(100, width-100), random.randint(100, height-100)])
 						  

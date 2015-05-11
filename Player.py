@@ -1,6 +1,7 @@
 import pygame, sys, math
 from Bullet import Bullet
 
+
 class Player(pygame.sprite.Sprite):
 	def __init__(self, pos = [300,400], size = [100,100]):
 		pygame.sprite.Sprite.__init__(self, self.containers)
@@ -33,7 +34,8 @@ class Player(pygame.sprite.Sprite):
 		self = args[0]
 		width = args[1]
 		height = args[2]
-		self.move()
+		blocks = args[3]
+		self.move(blocks)
 		self.animate()
 		self.changed = False
 		
@@ -46,10 +48,30 @@ class Player(pygame.sprite.Sprite):
 		return []
 		
 		
-	def move(self):
+	def move(self, blocks):
 		self.speed = [self.speedx, self.speedy]
-		self.rect = self.rect.move(self.speed)
 		self.moving = True
+ 
+		self.rect = self.rect.move([self.speedx,0])
+ 
+		block_hit_list = pygame.sprite.spritecollide(self, blocks, False)
+		for block in block_hit_list:
+			if self.speedx > 0:
+				self.rect.right = block.rect.left
+			else:
+				self.rect.left = block.rect.right
+ 
+		self.rect = self.rect.move([0,self.speedy])
+ 
+		block_hit_list = pygame.sprite.spritecollide(self, blocks, False)
+		for block in block_hit_list:
+ 
+			if self.speedy > 0:
+				self.rect.bottom = block.rect.top
+			else:
+				self.rect.top = block.rect.bottom
+				
+		
 		
 	def animate(self):
 		if self.waitCount < self.maxWait:
@@ -81,17 +103,8 @@ class Player(pygame.sprite.Sprite):
 	
 	
 	def collideBlock(self, other):
-		if self.rect.top < other.rect.bottom:
-			self.rect.top = other.rect.bottom + 1
-		#if self.rect.bottom > other.rect.top:
-			#self.rect.bottom = other.rect.top + 1
-		#if self.rect.left < other.rect.right:
-			#self.rect.left = other.rect.right + 1
-		#if self.rect.right > other.rect.left:
-			#self.rect.right = other.rect.left + 1
+		pass
 				
-			
-		
 
 	
 	def go(self, direction):

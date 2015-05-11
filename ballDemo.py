@@ -142,7 +142,7 @@ while True:
 			for victem in ballsHitBalls[bully]:
 				bully.collideBall(victem)
 		
-		all.update(width, height)
+		all.update(width, height, blocks)
 		
 		dirty = all.draw(screen)
 		pygame.display.update(dirty)

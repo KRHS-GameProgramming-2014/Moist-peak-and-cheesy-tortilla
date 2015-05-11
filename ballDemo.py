@@ -124,6 +124,11 @@ while True:
 		playersHitBalls = pygame.sprite.groupcollide(players, balls, False, True)
 		ballsHitBalls = pygame.sprite.groupcollide(balls, balls, False, False)
 		bulletsHitBalls = pygame.sprite.groupcollide(bullets, balls, True , True)
+		playersHitBlocks = pygame.sprite.groupcollide(players, blocks, False, False)
+		
+		for player in playersHitBlocks:
+			for block in playersHitBlocks[player]:
+				player.collideBlock(block)
 		
 		for player in playersHitBalls:
 			for ball in playersHitBalls[player]:

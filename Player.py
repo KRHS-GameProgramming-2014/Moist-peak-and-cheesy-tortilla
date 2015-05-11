@@ -79,6 +79,21 @@ class Player(pygame.sprite.Sprite):
 		self.image = rot_image
 		self.moving = False
 	
+	
+	def collideBlock(self, other):
+		if self.rect.top < other.rect.bottom:
+			self.rect.top = other.rect.bottom + 1
+		#if self.rect.bottom > other.rect.top:
+			#self.rect.bottom = other.rect.top + 1
+		#if self.rect.left < other.rect.right:
+			#self.rect.left = other.rect.right + 1
+		#if self.rect.right > other.rect.left:
+			#self.rect.right = other.rect.left + 1
+				
+			
+		
+
+	
 	def go(self, direction):
 		if direction == "up":
 			self.speedy = -self.maxSpeed
@@ -97,7 +112,3 @@ class Player(pygame.sprite.Sprite):
 			self.speedx = -self.maxSpeed
 		elif direction == "stop left":
 			self.speedx = 0
-
-	#def shoot(self, option=None):
-		#if option == None:
-			#return Bullet(self.rect.center, self.angle)

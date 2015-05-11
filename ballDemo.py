@@ -68,7 +68,7 @@ while True:
 		pygame.display.flip()
 		clock.tick(60)
 		
-	BackGround("images/Screens/Main Screen.png")
+	BackGround("images/Floors/Brick Floor.png")
 	
 	player = Player([width/2, height/2])
 	

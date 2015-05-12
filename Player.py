@@ -5,10 +5,11 @@ from Bullet import Bullet
 class Player(pygame.sprite.Sprite):
 	def __init__(self, pos = [300,400], size = [100,100]):
 		pygame.sprite.Sprite.__init__(self, self.containers)
-		self.images = [pygame.image.load("images/player/Mr. MLG.PNG"),
-							pygame.image.load("images/player/RightFootForward.PNG"),
-							pygame.image.load("images/player/Mr. MLG.PNG"),
-							pygame.image.load("images/player/LeftFootForward.PNG")]
+		self.images = [pygame.image.load("images/player/Mr. MLGTest.PNG")#,
+							#pygame.image.load("images/player/RightFootForward.PNG"),
+							#pygame.image.load("images/player/Mr. MLG.PNG"),
+							#pygame.image.load("images/player/LeftFootForward.PNG")
+							]
 		self.changed = False
 		self.stopImage = pygame.image.load("images/player/Mr. MLG.PNG")
 		self.frame = 0

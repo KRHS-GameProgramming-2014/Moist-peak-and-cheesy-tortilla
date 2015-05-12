@@ -73,7 +73,7 @@ while True:
 	player = Player([width/2, height/2])
 	
 	
-	level = Level(size, 50)
+	level = Level(size, 40)
 	level.loadLevel("1")
 
 	timer = Score([80, height - 25], "Time: ", 36)

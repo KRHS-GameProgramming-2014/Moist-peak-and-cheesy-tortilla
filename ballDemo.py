@@ -85,25 +85,25 @@ while True:
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT: sys.exit()
 			if event.type == pygame.KEYDOWN:
-				if event.key == pygame.K_w or event.key == pygame.K_UP:
+				if event.key == pygame.K_w:
 					player.go("up")
-				if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+				if event.key == pygame.K_d:
 					player.go("right")
-				if event.key == pygame.K_s or event.key == pygame.K_DOWN:
+				if event.key == pygame.K_s:
 					player.go("down")
-				if event.key == pygame.K_a or event.key == pygame.K_LEFT:
+				if event.key == pygame.K_a:
 					player.go("left")
 			elif event.type == pygame.MOUSEBUTTONDOWN:
 				if event.button == 1:
 					b = player.attack("dorito")
 			if event.type == pygame.KEYUP:
-				if event.key == pygame.K_w or event.key == pygame.K_UP:
+				if event.key == pygame.K_w:
 					player.go("stop up")
-				if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
+				if event.key == pygame.K_d:
 					player.go("stop right")
-				if event.key == pygame.K_s or event.key == pygame.K_DOWN:
+				if event.key == pygame.K_s:
 					player.go("stop down")
-				if event.key == pygame.K_a or event.key == pygame.K_LEFT:
+				if event.key == pygame.K_a:
 					player.go("stop left")
 				elif (event.key == pygame.MOUSEBUTTONUP):
 					b = player.shoot("stop")		

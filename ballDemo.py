@@ -8,6 +8,7 @@ from BackGround import BackGround
 from Level import Level
 from Block import Block
 from Bullet import Bullet
+from Enemy import Enemy
 
 pygame.init()
 
@@ -25,7 +26,7 @@ screen = pygame.display.set_mode(size)
 bgImage = pygame.image.load("images/Screens/Start Screen.png").convert()
 bgRect = bgImage.get_rect()
 
-balls = pygame.sprite.Group()
+enemies = pygame.sprite.Group()
 players = pygame.sprite.Group()
 hudItems = pygame.sprite.Group()
 backgrounds = pygame.sprite.Group()
@@ -33,7 +34,7 @@ blocks = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
 all = pygame.sprite.OrderedUpdates()
 
-Ball.containers = (all, balls)
+Enemy.containers = (all, enemies)
 Player.containers = (all, players)
 BackGround.containers = (all, backgrounds)
 Bullet.containers = (all, bullets)
@@ -86,33 +87,33 @@ while True:
 			if event.type == pygame.QUIT: sys.exit()
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_w:
-					player.go("up")
+					player.speedy += -8
 				if event.key == pygame.K_d:
-					player.go("right")
+					player.speedx += 8
 				if event.key == pygame.K_s:
-					player.go("down")
+					player.speedy += 8
 				if event.key == pygame.K_a:
-					player.go("left")
+					player.speedx += -8
 			elif event.type == pygame.MOUSEBUTTONDOWN:
 				if event.button == 1:
 					b = player.attack("dorito")
 			if event.type == pygame.KEYUP:
 				if event.key == pygame.K_w:
-					player.go("stop up")
+					player.speedy -= -8
 				if event.key == pygame.K_d:
-					player.go("stop right")
+					player.speedx -= 8
 				if event.key == pygame.K_s:
-					player.go("stop down")
+					player.speedy -= 8
 				if event.key == pygame.K_a:
-					player.go("stop left")
+					player.speedx -= -8
 				elif (event.key == pygame.MOUSEBUTTONUP):
 					b = player.shoot("stop")		
 								
-		if len(balls) < 10:
-			if random.randint(0, 1*60) == 0:
-				Ball("images/Ball/Snoop Dogg.png",
-						  [random.randint(0,10), random.randint(0,10)],
-						  [random.randint(100, width-100), random.randint(100, height-100)])
+		if len(enemies) < 10:
+			if random.randint(0, 2*60) == 0:
+				Enemy([400,400],
+					  [80,80],
+					  [5,0])
 						  
 						  
 		if timerWait < timerWaitMax:
@@ -121,26 +122,26 @@ while True:
 			timerWait = 0
 			timer.increaseScore(.1)
 		
-		playersHitBalls = pygame.sprite.groupcollide(players, balls, False, True)
-		ballsHitBalls = pygame.sprite.groupcollide(balls, balls, False, False)
-		bulletsHitBalls = pygame.sprite.groupcollide(bullets, balls, True , True)
+		playersHitEnemies = pygame.sprite.groupcollide(players, enemies, False, True)
+		enemiesHitEnemies = pygame.sprite.groupcollide(enemies, enemies, False, False)
+		bulletsHitEnemies = pygame.sprite.groupcollide(bullets, enemies, True , True)
 		playersHitBlocks = pygame.sprite.groupcollide(players, blocks, False, False)
 		
 		for player in playersHitBlocks:
 			for block in playersHitBlocks[player]:
 				player.collideBlock(block)
 		
-		for player in playersHitBalls:
-			for ball in playersHitBalls[player]:
+		for player in playersHitEnemies:
+			for enemy in playersHitEnemies[player]:
 				score.increaseScore(1)
 				
-		for bullet in playersHitBalls:
-			for ball in playersHitBalls[player]:
+		for bullet in bulletsHitEnemies:
+			for enemy in bulletsHitEnemies[bullet]:
 				score.increaseScore(1)
 				
-		for bully in ballsHitBalls:
-			for victem in ballsHitBalls[bully]:
-				bully.collideBall(victem)
+		for bully in enemiesHitEnemies:
+			for victem in enemiesHitEnemies[bully]:
+				bully.collideEnemy(victem)
 		
 		all.update(width, height, blocks)
 		

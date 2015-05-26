@@ -24,8 +24,8 @@ class Player(pygame.sprite.Sprite):
 		self.speedy = 0
 		self.shooting = False
 		self.moving = False
-		self.doritoCount = 0
-		self.maxDoritoCount = 100000000
+		self.doritoCount = 10
+		self.maxDoritoCount = 10
 		self.doritoCoolDown = 0
 		self.doritoCoolDownMax = 50
 		self.doritoDelay = 5
@@ -41,9 +41,10 @@ class Player(pygame.sprite.Sprite):
 		self.changed = False
 		
 	def attack(self, atk):
-		if atk == "dorito" and self.doritoCoolDown == 0:
+		if atk == "dorito" and self.doritoCoolDown == 0 and self.doritoCount > 0:
 			self.shooting = True
 			#self.doritoCoolDown = self.doritoCoolDownMax
+			self.doritoCount -= 1
 			return [Bullet(self.rect.center, self.angle)]
 		
 		return []

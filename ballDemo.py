@@ -145,21 +145,8 @@ while True:
 		
 		all.update(width, height, blocks)
 		
-		dirty = all.draw(screen)
+		dirty = all.draw(screen)                                                           
 		pygame.display.update(dirty)
-		pygame.display.flip()
-		clock.tick(60)
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		pygame.display.flip()                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       .                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   .
+		clock.tick(60)                                                                     
 		

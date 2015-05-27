@@ -25,7 +25,7 @@ class Player(pygame.sprite.Sprite):
 		self.shooting = False
 		self.moving = False
 		self.doritoCount = 10
-		self.maxDoritoCount = 10
+		self.maxDoritoCount = 100000
 		self.doritoCoolDown = 0
 		self.doritoCoolDownMax = 50
 		self.doritoDelay = 5

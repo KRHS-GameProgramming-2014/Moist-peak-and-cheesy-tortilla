@@ -107,7 +107,7 @@ while True:
 				if event.key == pygame.K_a:
 					player.speedx -= -8
 				elif (event.key == pygame.MOUSEBUTTONUP):
-					b = player.shoot("stop")		
+					b = player.shoot("stop")        
 								
 		if len(enemies) < 10:
 			if random.randint(0, 2*60) == 0:
@@ -148,4 +148,4 @@ while True:
 		dirty = all.draw(screen)                                                           
 		pygame.display.update(dirty)
 		pygame.display.flip()
-        clock.tick(60)
+		clock.tick(60)

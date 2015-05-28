@@ -49,6 +49,10 @@ class Score(Text):
 		self.score += amount
 		self.change = True
 		
+	def decreaseScore(self, amount = 1):
+		self.score -= amount
+		self.change = True
+		
 	def resetScore(self):
 		self.score = 0
 		self.change = True

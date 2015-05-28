@@ -126,6 +126,7 @@ while True:
 		enemiesHitEnemies = pygame.sprite.groupcollide(enemies, enemies, False, False)
 		bulletsHitEnemies = pygame.sprite.groupcollide(bullets, enemies, True , True)
 		playersHitBlocks = pygame.sprite.groupcollide(players, blocks, False, False)
+		bulletsHitBlocks = pygame.sprite.groupcollide(bullets, blocks, True , False)
 		
 		for player in playersHitBlocks:
 			for block in playersHitBlocks[player]:
@@ -133,7 +134,7 @@ while True:
 		
 		for player in playersHitEnemies:
 			for enemy in playersHitEnemies[player]:
-				score.increaseScore(1)
+				score.decreaseScore(1)
 				
 		for bullet in bulletsHitEnemies:
 			for enemy in bulletsHitEnemies[bullet]:
